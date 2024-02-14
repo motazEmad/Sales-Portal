@@ -15,6 +15,16 @@
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/customer-identity-service" />
+        <option name="gradleHome" value="/usr/local/Cellar/gradle/8.6/libexec" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/customer-identity-service" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/product-catalog-service" />
         <option name="gradleHome" value="/usr/local/Cellar/gradle/8.6/libexec" />
         <option name="modules">

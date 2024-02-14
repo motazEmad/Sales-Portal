@@ -1,7 +1,8 @@
-<ul *ngFor="let product of products">
-    <li>
-        <div>{{product.productName}}</div>
-        <div>{{product.description}}</div>
-    </li>
-
-</ul>
+<mat-grid-list cols="3" rowHeight="2:1" role="list">
+    <mat-grid-tile role="listitem" *ngFor="let product of products">
+        <mat-card>
+            <mat-card-header>{{product.productName}}</mat-card-header>
+            <mat-card-content>{{product.description}}</mat-card-content>
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>
