@@ -1,4 +1,4 @@
-package com.sp.productcatalogservice.product;
+package com.sp.productcatalogservice.entity;
 
 import lombok.*;
 

@@ -1,4 +1,4 @@
-package com.sp.productcatalogservice.product;
+package com.sp.productcatalogservice.entity;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
@@ -18,5 +18,5 @@ public class Product {
 
     private float price;
 
-    private int quantity;
+    private Integer quantity;
 }

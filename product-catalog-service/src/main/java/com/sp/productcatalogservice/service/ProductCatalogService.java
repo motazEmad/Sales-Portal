@@ -2,12 +2,14 @@ package com.sp.productcatalogservice.service;
 
 import com.sp.productcatalogservice.exception.BusinessException;
 import com.sp.productcatalogservice.persistance.ProductRepository;
-import com.sp.productcatalogservice.product.ErrorResponse;
-import com.sp.productcatalogservice.product.Product;
+import com.sp.productcatalogservice.entity.ErrorResponse;
+import com.sp.productcatalogservice.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -15,13 +17,17 @@ import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("product/v1")
+@RequestMapping("api/product/v1")
 public class ProductCatalogService {
 
-    @Autowired
     ProductRepository productRepository;
+
+    public ProductCatalogService(@Autowired ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     @ExceptionHandler(BusinessException.class)
     public ResponseEntity<ErrorResponse> mapException(Exception e) {
@@ -49,10 +55,12 @@ public class ProductCatalogService {
         return !product.isPresent() ? ResponseEntity.notFound().build()
                 : ResponseEntity.ok(product.get());
     }
-
-    // TODO mask quantity for not admin role
     @GetMapping("/products")
-    public ResponseEntity<List<Product>> getAll() {
-        return ResponseEntity.ok(productRepository.findAll());
+    public ResponseEntity<List<Product>> getAll(Authentication authentication) {
+        List<Product> products = productRepository.findAll();
+        if(authentication == null || !authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+            products.stream().forEach(p -> p.setQuantity(null));
+        }
+        return ResponseEntity.ok(products);
     }
 }

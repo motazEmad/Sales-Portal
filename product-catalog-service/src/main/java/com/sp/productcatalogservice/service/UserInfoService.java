@@ -30,6 +30,7 @@ public class UserInfoService {
         map.put("token", jwt.getTokenValue());
         map.put("authorities", authentication.getAuthorities());
         map.put("roles", getRoles(jwt));
+        map.put("userid", jwt.getClaimAsString("userid"));
 
         return map;
     }

@@ -1,6 +1,6 @@
 package com.sp.productcatalogservice.persistance;
 
-import com.sp.productcatalogservice.product.Product;
+import com.sp.productcatalogservice.entity.Product;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;
